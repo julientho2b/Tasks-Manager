@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chachou Tasks</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>
+        <span class="secret-letter">C</span>hachou
+        <span class="secret-letter">T</span>asks
+      </h1>
+
+      <form id="task-form">
+        <input type="text" id="task-input" placeholder="Ajouter une tâche..." />
+        <input type="date" id="date-input" />
+
+        <button type="submit">Ajouter</button>
+      </form>
+      <button class="todo-tasks">A faire <span>(0)</span></button>
+      <button class="done-tasks">Terminées <span>(0)</span></button>
+      <button class="all-tasks">Toutes <span>(0)</span></button>
+      <ul id="task-list"></ul>
+    </main>
+
+    <div class="modal-modif">
+      <h2>Modifier</h2>
+      <p class="modal-message-modif"></p>
+      <input type="text" class="modal-input" />
+      <button class="cancel">Annuler</button>
+      <button class="confirm">Modifier</button>
+    </div>
+
+    <div class="modal-alert">
+      <h2>Rappel</h2>
+      <p class="modal-message-alert"></p>
+      <button class="cancel">Fermer</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

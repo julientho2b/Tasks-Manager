@@ -1,0 +1,450 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: #0f1117;
+  color: #f5f5f5;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+main.private-mode {
+  background: #211923;
+}
+
+main {
+  text-align: center;
+  width: 90%;
+  max-width: 650px;
+  margin: 70px auto;
+  padding: 35px;
+  background: #181b24;
+  border: 1px solid #272b36;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   TITRE
+========================= */
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+/* =========================
+   FORMULAIRE
+========================= */
+
+form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#task-input {
+  width: 350px;
+  padding: 14px 16px;
+  background: #10131a;
+  color: #ffffff;
+  border: 1px solid #303542;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+#task-input::placeholder {
+  color: #777d8a;
+}
+
+#task-input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* =========================
+   DATE + RAPPEL
+========================= */
+.reminderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.dateLineContainer > span {
+  flex: 0 0 auto !important;
+}
+
+.dateLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dateLine > span {
+  flex: 0 0 auto !important;
+}
+
+.dateLineContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.reminderContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.reminderContainer span {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+  flex: 0 0 25px !important;
+}
+
+/* =========================
+   BOUTONS
+========================= */
+
+.all-tasks.active,
+.todo-tasks.active,
+.done-tasks.active {
+  border: 1px solid #8b5cf6;
+  color: white;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 5px;
+}
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 17px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Ajouter */
+
+form button {
+  background: #8b5cf6;
+  color: white;
+}
+
+form button:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+}
+
+.secret-letter {
+  color: #8b5cf6;
+}
+/* =========================
+   MODAL
+========================= */
+
+.modal-modif,
+.modal-alert {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #181b24;
+  padding: 25px;
+  border: 1px solid #303542;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #10131a;
+  color: #ffffff;
+  border: 1px solid #303542;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  margin: 15px auto;
+}
+
+.modal-message-alert,
+.modal-message-modif {
+  margin: 10px 0;
+  color: #cbd0da;
+  font-size: 15px;
+}
+
+.modal-modif button,
+.modal-alert button {
+  margin: 10px 5px;
+}
+
+.modal-modif .cancel,
+.modal-alert .cancel {
+  background: #3a2025;
+  color: #f87171;
+}
+
+.modal-modif .confirm {
+  background: #8b5cf6;
+  color: white;
+}
+
+.modal-modif .cancel:hover,
+.modal-alert .cancel:hover {
+  background: #51252c;
+}
+
+.modal-modif .confirm:hover {
+  background: #7c3aed;
+}
+
+/* =========================
+   FILTRES
+========================= */
+.all-tasks span::before,
+.todo-tasks span::before,
+.done-tasks span::before {
+  content: "(";
+}
+
+.all-tasks span::after,
+.todo-tasks span::after,
+.done-tasks span::after {
+  content: ")";
+}
+
+.all-tasks,
+.todo-tasks,
+.done-tasks {
+  background: #252936;
+  color: #cbd0da;
+  margin-right: 6px;
+  margin-bottom: 25px;
+  border: 1px solid #303542;
+}
+
+.all-tasks:hover,
+.todo-tasks:hover,
+.done-tasks:hover {
+  background: #303542;
+  color: white;
+}
+
+/* =========================
+   LISTE
+========================= */
+
+#task-list {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+/* =========================
+   TÂCHE
+========================= */
+
+.taskText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+#task-list li.private-task {
+  background: #4a1f3d;
+}
+
+#task-list li {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: #222630;
+  border: 1px solid #2d323e;
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+
+#task-list li:hover {
+  border-color: #3b4150;
+  transform: translateY(-1px);
+}
+
+/* Texte */
+
+#task-list li span:not(.status) {
+  flex: 1;
+  font-size: 16px;
+  color: #eeeeee;
+}
+
+/* =========================
+   RAPPEL
+========================= */
+
+#task-list li .ringReminder,
+#task-list li .ringReminderTwo {
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+/* =========================
+   STATUT
+========================= */
+
+.status {
+  width: 49px;
+  height: 44px;
+  padding: 12px 17px;
+  background: transparent;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.status.done {
+  background-color: green;
+  color: white;
+}
+/* =========================
+   BOUTON SUPPRIMER
+========================= */
+
+#task-list li button:nth-of-type(2) {
+  border: 1px solid #555;
+  background: #5c2028;
+  color: #ff7b87;
+}
+
+#task-list li button:nth-of-type(2):hover {
+  background: #51252c;
+}
+
+/* =========================
+   BOUTON MODIFIER
+========================= */
+
+#task-list li button:not(.status):last-of-type {
+  border: 1px solid #555;
+  background: #30245c;
+  color: #b69cff;
+}
+
+#task-list li button:not(.status):last-of-type:hover {
+  background: #352d59;
+}
+
+/* =========================
+   TÂCHE TERMINÉE
+========================= */
+
+#task-list li.completed {
+  opacity: 1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media screen and (max-width: 1500px) {
+  main {
+    width: 95%;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 94%;
+    margin: 30px auto;
+    padding: 22px;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  form button {
+    text-align: center;
+  }
+
+  #task-input {
+    width: 100%;
+    text-align: center;
+  }
+
+  #date-input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .buttonGroup button {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+  }
+  .taskInfo {
+    gap: 20px;
+  }
+
+  .modal-modif,
+  .modal-alert {
+    width: 65%;
+    padding: 18px;
+  }
+  #task-list li span:not(.status) {
+    font-size: 14px;
+  }
+
+  .dateLine {
+    font-size: 13px;
+  }
+}
