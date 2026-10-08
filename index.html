@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f2fc" />
+
+    <title>Chachou Tasks</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>
+        <span class="secret-letter">C</span>hachou
+        <span class="secret-letter">T</span>asks
+      </h1>
+
+      <form id="task-form">
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Ajouter une tâche..."
+          aria-label="Nouvelle tâche"
+          autocomplete="off"
+        />
+        <input type="date" id="date-input" aria-label="Date limite" required />
+
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <div class="filters">
+        <button class="all-tasks">Toutes <span>0</span></button>
+        <button class="todo-tasks">À faire <span>0</span></button>
+        <button class="done-tasks">Terminées <span>0</span></button>
+        <button class="export-all" type="button">📆 Tout exporter</button>
+      </div>
+
+      <ul id="task-list"></ul>
+    </main>
+
+    <div class="modal-modif" role="dialog" aria-label="Modifier la tâche">
+      <h2>Modifier</h2>
+      <p class="modal-message-modif"></p>
+      <input type="text" class="modal-input" aria-label="Nouveau texte" />
+      <button class="cancel">Annuler</button>
+      <button class="confirm">Modifier</button>
+    </div>
+
+    <div class="modal-alert" role="dialog" aria-label="Rappel">
+      <h2>Rappel</h2>
+      <p class="modal-message-alert"></p>
+      <button class="cancel">Fermer</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

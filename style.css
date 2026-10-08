@@ -1,0 +1,482 @@
+/* =========================
+   COULEURS
+   normal : blanc + encre noire + bleu
+   privé  : tout passe en nuit + corail
+========================= */
+
+:root {
+  --bg: #fbfbfd;
+  --ink: #101014;
+  --muted: #8b8b97;
+  --line: #ececf1;
+  --accent: #4f46e5;
+  --soft: rgba(79, 70, 229, 0.1);
+  --bad: #e5484d;
+  --warn: #d98a00;
+  --ok: #2f9e6e;
+  --font-title: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e12;
+    --ink: #f3f3f7;
+    --muted: #7e7e8c;
+    --line: #1f1f27;
+    --accent: #8b87ff;
+    --soft: rgba(139, 135, 255, 0.14);
+    --bad: #ff6b70;
+    --warn: #f0b429;
+    --ok: #4cc38a;
+    color-scheme: dark;
+  }
+}
+
+/* Mode privé : fond prune très sombre + accent corail */
+body:has(main.private-mode) {
+  --bg: #170b1c;
+  --ink: #fbeef6;
+  --muted: #a98bb5;
+  --line: #2c1836;
+  --accent: #ff7a59;
+  --soft: rgba(255, 122, 89, 0.15);
+  --bad: #ff6b8a;
+  --warn: #ffc25c;
+  --ok: #5fd6a0;
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    "DM Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.4;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+button {
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =========================
+   PAGE + TITRE
+========================= */
+
+main {
+  width: 90%;
+  max-width: 600px;
+  margin: 72px auto;
+}
+
+h1 {
+  margin-bottom: 36px;
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.secret-letter {
+  color: #8b5cf6; /* les lettres secrètes ne se voient plus */
+}
+
+/* =========================
+   AJOUT
+========================= */
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 28px;
+  border-bottom: 1.5px solid var(--ink);
+  transition: border-color 0.2s ease;
+}
+
+form:focus-within {
+  border-color: var(--accent);
+}
+
+#task-input,
+#date-input {
+  min-width: 0;
+  background: transparent;
+  color: var(--ink);
+  border: none;
+  outline: none;
+  font: inherit;
+}
+
+#task-input {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 20px;
+}
+
+#task-input::placeholder {
+  color: var(--muted);
+}
+
+#date-input {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+form button {
+  padding: 9px 18px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+form button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* =========================
+   FILTRES
+========================= */
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 8px;
+}
+
+.all-tasks {
+  display: none; /* filtre « Toutes » masqué */
+}
+
+.filters button {
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease;
+}
+
+.filters button:hover {
+  color: var(--ink);
+}
+
+.filters button.active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--ink);
+}
+
+.filters button span {
+  margin-left: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.filters .export-all {
+  margin-left: auto;
+  font-size: 13px;
+  border-bottom: none;
+}
+
+.filters .export-all:hover {
+  color: var(--accent);
+}
+
+/* =========================
+   TÂCHES
+========================= */
+
+#task-list {
+  list-style: none;
+}
+
+#task-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.taskInfo {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 8px;
+  row-gap: 2px;
+  align-items: center;
+}
+
+.taskText {
+  grid-column: 1;
+  font-size: 17px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.taskInfo > div:nth-child(2) {
+  grid-column: 1;
+}
+
+.dateLineContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* l'urgence se lit dans la couleur de l'échéance */
+#task-list li:has(.ringReminderTwo) .dateLineContainer span:last-child {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+#task-list li:has(.ringReminder) .dateLineContainer span:last-child {
+  color: var(--bad);
+  font-weight: 700;
+}
+
+.reminderContainer {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: flex;
+}
+
+.ringReminder,
+.ringReminderTwo {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#task-list li.completed .taskText {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+#task-list li.completed .dateLineContainer {
+  opacity: 0.55;
+}
+
+/* tâche privée : un point de l'accent devant le texte */
+#task-list li.private-task .taskText::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 9px;
+  background: var(--accent);
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+/* =========================
+   BOUTONS D'UNE TÂCHE
+========================= */
+
+.buttonGroup {
+  display: contents;
+}
+
+.status {
+  order: -1;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: transparent;
+  border: 1.5px solid var(--muted);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.status:hover {
+  border-color: var(--ink);
+}
+
+.status.done {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.buttonGroup button:not(.status) {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#task-list li:hover .buttonGroup button,
+#task-list li:focus-within .buttonGroup button {
+  opacity: 0.6;
+}
+
+.buttonGroup button:not(.status):hover {
+  opacity: 1 !important;
+  background: var(--soft);
+}
+
+@media (hover: none) {
+  .buttonGroup button:not(.status) {
+    opacity: 0.6;
+  }
+}
+
+/* =========================
+   MODALES
+========================= */
+
+.modal-modif,
+.modal-alert {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  padding: 26px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 0 0 100vmax rgba(8, 8, 14, 0.5);
+  animation: pop 0.16s ease-out;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+}
+
+.modal-modif h2,
+.modal-alert h2 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.modal-message-alert,
+.modal-message-modif {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.modal-input {
+  width: 100%;
+  margin: 10px 0 18px;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--ink);
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+  outline: none;
+  font: inherit;
+  font-size: 17px;
+}
+
+.modal-input:focus {
+  border-color: var(--accent);
+}
+
+.modal-modif button,
+.modal-alert button {
+  padding: 10px 20px;
+  margin-right: 8px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.modal-modif .cancel,
+.modal-alert .cancel {
+  color: var(--muted);
+}
+
+.modal-modif .cancel:hover,
+.modal-alert .cancel:hover {
+  color: var(--ink);
+}
+
+.modal-modif .confirm {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.modal-modif .confirm:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  main {
+    margin: 40px auto;
+  }
+
+  form {
+    flex-wrap: wrap;
+  }
+
+  #task-input {
+    flex: 1 1 100%;
+  }
+
+  #date-input {
+    flex: 1;
+  }
+
+  .filters {
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
